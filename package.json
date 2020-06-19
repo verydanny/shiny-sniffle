@@ -1,0 +1,24 @@
+{
+  "name": "shiny-sniffle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:verydanny/shiny-sniffle.git",
+  "author": "Daniil Veremchuk <daniel@verydanny.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^16.9.38",
+    "@types/webpack": "^4.41.17",
+    "@types/webpack-env": "^1.15.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.5",
+    "webpack": "^4.43.0",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.2",
+    "webpack-universal-compiler": "^1.5.4"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
