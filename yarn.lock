@@ -2989,8 +2989,10 @@ eslint-plugin-typescript@^0.14.0:
   dependencies:
     requireindex "~1.1.0"
 
-eslint-plugin-verydanny@../eslint-config:
+eslint-plugin-verydanny@^1.0.0:
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-verydanny/-/eslint-plugin-verydanny-1.0.0.tgz#606c48c6ef6be8266e263cccd7e2d69bb90fcca4"
+  integrity sha512-4oKIGdtLwSShAyA467xamlON2l1IxCf0FSy8Z4Bh7T4UT2GnCrb7ayRtWIfD1Sq7uMeZpvYKKYd/VAXDpgToiw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^3.4.0"
     "@typescript-eslint/parser" "^3.4.0"

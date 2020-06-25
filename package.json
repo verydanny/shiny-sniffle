@@ -9,6 +9,7 @@
     "dev": "NODE_ENV=development PORT=3000 ts-node -T bin/development.ts"
   },
   "devDependencies": {
+    "eslint-plugin-verydanny": "^1.0.0",
     "@babel/core": "^7.10.3",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.1",
@@ -29,13 +30,13 @@
     "typescript": "^3.9.5",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^4.2.2",
-    "webpack-universal-compiler": "^1.5.5"
+    "webpack-universal-compiler": "^1.5.5",
+    "webpack": "^4.43.0"
   },
   "dependencies": {
-    "eslint-plugin-verydanny": "../eslint-config",
     "express": "^4.17.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "webpack": "^4.43.0"
+    "react-dom": "^16.13.1"
+    
   }
 }
