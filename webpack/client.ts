@@ -1,6 +1,4 @@
-import path from 'path'
-
-import { Configuration } from 'webpack'
+import webpack, { Configuration } from 'webpack'
 import { smart } from 'webpack-merge'
 
 import { WebpackEnvironment } from '../types/webpack'
@@ -12,7 +10,30 @@ const defaultEnv = {
 }
 
 export const clientConfig = (env: WebpackEnvironment = defaultEnv) => {
-  const IS_DEV = env.mode === 'development'
+  return smart(sharedConfig(env), {
+    plugins: [new webpack.HashedModuleIdsPlugin()],
+    optimization: {
+      runtimeChunk: 'single',
+      splitChunks: {
+        chunks: 'all',
+        maxInitialRequests: Infinity,
+        minSize: 0,
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name(module) {
+              // get the name. E.g. node_modules/packageName/not/this/part.js
+              // or node_modules/packageName
+              const packageName = module.context.match(
+                /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
+              )[1]
 
-  return smart(sharedConfig(env), {} as Configuration)
+              // npm package names are URL-safe, but some servers don't like @ symbols
+              return `npm.${packageName.replace('@', '')}`
+            },
+          },
+        },
+      },
+    },
+  } as Configuration)
 }

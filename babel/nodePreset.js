@@ -4,11 +4,13 @@ module.exports = function nodePreset(_api, options = {}) {
   const {
     version = 'current',
     modules = 'commonjs',
-    corejs = 2,
+    corejs = 3,
     debug = false,
     useBuiltIns = 'entry',
     typescript = false,
   } = options
+
+  console.log(options)
 
   const presets = [
     [

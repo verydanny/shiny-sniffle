@@ -1,6 +1,7 @@
 import * as path from 'path'
 
 import webpack from 'webpack'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
 import { WebpackEnvironment } from '../types/webpack'
 
@@ -33,12 +34,15 @@ export const sharedConfig = (env: WebpackEnvironment) => {
           test: /\.tsx?$/,
           loader: 'babel-loader',
           options: {
-            cacheDirectory: true,
+            cacheDirectory: !IS_DEV,
             envName: `${target}_${mode}`,
           },
         },
       ],
     },
-    plugins: [new webpack.HotModuleReplacementPlugin()],
+    plugins: [
+      IS_DEV && new webpack.HotModuleReplacementPlugin(),
+      new CleanWebpackPlugin(),
+    ].filter(Boolean),
   } as webpack.Configuration
 }

@@ -1,5 +1,5 @@
 module.exports = function plugins(options = {}) {
-  const { inlineEnv = false, typescript = false } = options
+  const { inlineEnv = false, typescript = false, production = false } = options
 
   const plugs = [require.resolve('@babel/plugin-syntax-dynamic-import')]
 
@@ -27,7 +27,22 @@ module.exports = function plugins(options = {}) {
       ],
     )
   } else {
-    plugs.push(require.resolve('@babel/plugin-proposal-class-properties'))
+    plugs.push([
+      require.resolve('@babel/plugin-proposal-class-properties'),
+      {
+        loose: true,
+      },
+    ])
+  }
+
+  if (production) {
+    plugs.push([
+      '@babel/plugin-transform-runtime',
+      {
+        corejs: 2,
+        useESModules: true,
+      },
+    ])
   }
 
   return plugs

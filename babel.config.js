@@ -4,6 +4,8 @@ module.exports = (api) => {
   const SERVER_DEVELOPMENT = ENV === 'server_development'
   const SERVER_PRODUCTION = ENV === 'server_production'
 
+  api.cache.using(() => SERVER_DEVELOPMENT || CLIENT_DEVELOPMENT)
+
   return {
     presets: [
       SERVER_DEVELOPMENT || SERVER_PRODUCTION
@@ -17,8 +19,8 @@ module.exports = (api) => {
         : [
             require.resolve('./babel/clientPreset'),
             {
+              typescript: true,
               production: !CLIENT_DEVELOPMENT,
-              debug: true,
             },
           ],
       '@babel/preset-react',
