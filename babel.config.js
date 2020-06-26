@@ -1,48 +1,27 @@
 module.exports = (api) => {
-  const DEV = process.env.NODE_ENV === 'development'
-
-  api.cache(false)
+  const ENV = api.env()
+  const CLIENT_DEVELOPMENT = ENV === 'client_development'
+  const SERVER_DEVELOPMENT = ENV === 'server_development'
+  const SERVER_PRODUCTION = ENV === 'server_production'
 
   return {
     presets: [
-      [
-        '@babel/preset-env',
-        {
-          modules: false,
-          targets: {
-            node: 'current',
-          },
-        },
-      ],
+      SERVER_DEVELOPMENT || SERVER_PRODUCTION
+        ? [
+            require.resolve('./babel/nodePreset'),
+            {
+              typescript: true,
+              modules: false,
+            },
+          ]
+        : [
+            require.resolve('./babel/clientPreset'),
+            {
+              production: !CLIENT_DEVELOPMENT,
+              debug: true,
+            },
+          ],
       '@babel/preset-react',
-      '@babel/preset-typescript',
-    ],
-    plugins: [
-      [
-        '@babel/plugin-proposal-class-properties',
-        {
-          loose: true,
-        },
-      ],
-      [
-        '@babel/plugin-proposal-object-rest-spread',
-        {
-          loose: true,
-          useBuiltIns: true,
-        },
-      ],
-      [
-        '@babel/plugin-proposal-optional-chaining',
-        {
-          loose: true,
-        },
-      ],
-      [
-        '@babel/plugin-proposal-nullish-coalescing-operator',
-        {
-          loose: true,
-        },
-      ],
     ],
   }
 }

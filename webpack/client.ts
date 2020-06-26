@@ -3,24 +3,16 @@ import path from 'path'
 import { Configuration } from 'webpack'
 import { smart } from 'webpack-merge'
 
+import { WebpackEnvironment } from '../types/webpack'
+
 import { sharedConfig } from './shared'
 
 const defaultEnv = {
-  mode: 'development',
+  mode: 'development' as const,
 }
 
-export const clientConfig = (env = defaultEnv) =>
-  smart(sharedConfig(env), {
-    name: 'client',
-    entry: './src/client/entry.tsx',
-    output: {
-      path: path.resolve(env.path, 'client/'),
-      publicPath: '/assets/',
-      filename: '[name].js',
-      chunkFilename: '[id].js',
-      pathinfo: false,
-      hotUpdateMainFilename: 'hot-update.json',
-      hotUpdateChunkFilename: '[id].hot-update.js',
-    },
-    target: 'web',
-  } as Configuration)
+export const clientConfig = (env: WebpackEnvironment = defaultEnv) => {
+  const IS_DEV = env.mode === 'development'
+
+  return smart(sharedConfig(env), {} as Configuration)
+}

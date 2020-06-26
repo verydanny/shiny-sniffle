@@ -4,6 +4,14 @@ import { renderToString } from 'react-dom/server'
 
 import { App } from '../../app/app'
 
+const fakeObj = {
+  foo: {
+    bar: 'hello',
+  },
+}
+
+const test = fakeObj?.foo
+
 export const renderMiddleware = (
   req: Request,
   res: Response,

@@ -28,7 +28,8 @@
   },
   "include": [
     "src",
-    "bin"
+    "bin",
+    "types"
   ],
   "exclude": [
     "node_modules"

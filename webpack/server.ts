@@ -1,26 +1,16 @@
-import path from 'path'
-
 import { Configuration } from 'webpack'
+import ExternalsPlugin from 'webpack-node-externals'
 import { smart } from 'webpack-merge'
+
+import { WebpackEnvironment } from '../types/webpack'
 
 import { sharedConfig } from './shared'
 
 const defaultEnv = {
-  mode: 'development',
+  mode: 'development' as const,
 }
 
-export const serverConfig = (env = defaultEnv) =>
+export const serverConfig = (env: WebpackEnvironment = defaultEnv) =>
   smart(sharedConfig(env), {
-    name: 'server',
-    entry: './src/server/entry.ts',
-    output: {
-      path: path.resolve(env.path, 'server/'),
-      libraryTarget: 'commonjs2',
-      filename: '[name].js',
-      chunkFilename: '[id].js',
-      pathinfo: false,
-      hotUpdateMainFilename: 'hot-update.json',
-      hotUpdateChunkFilename: '[id].hot-update.js',
-    },
-    target: 'node',
+    externals: [ExternalsPlugin()],
   } as Configuration)
