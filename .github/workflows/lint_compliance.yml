@@ -1,0 +1,19 @@
+name: Linting Compliance
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest #18.04
+    name: Checking Compliance
+    steps:
+      - name: Checkout head
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+        
+      - name: Add dependencies
+        run: yarn add eslint-plugin-verydanny
+
+      - name: Linting...
+        run: yarn lint
